@@ -133,6 +133,10 @@ function launch(app, req, res) {
             PORTAL_HOME: "/data/home/galaxy/src/cbioportal.org",
             NODE_PATH:"/usr/local/lib/node_modules:$NODE_PATH",
 
+            // For ingesting data
+            MEDBOOK_APP_DIR: app.cwd,
+            MEDBOOK_APP_DATA: app.data ? app.data : app.cwd + "/data",
+
             // This should be much less and pared down to the essentials.
             PATH: "/data/home/galaxy/.local/bin:/data/packages/stuartlab/perl/Tools:/data/packages/py-lib/:/usr/lib64/qt-3.3/bin:/usr/local/bin/mongodb/bin:/data/packages/drl-graph-layout/bin:/data/packages/apache-maven-3.0.4/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/data/home/galaxy/bin:/data/packages/stuartlab/perl/Tools:/data/packages/py-lib/:/usr/local/apache-maven-3.2.2/bin",
 
@@ -320,7 +324,7 @@ run = function() {
         // console.log("xenafiling");
         proxy.web(req, res, {
           target: "https://genome-cancer.soe.ucsc.edu/" ,
-          timeout:10000,
+          timeout: 7*24*60*60*1000
           /*
           xfwd: true,
           toProxy: true,
@@ -362,7 +366,7 @@ run = function() {
         //console.log("mapping", origReqUrl, target, req.url);
         proxy.web(req, res, {
           target: target,
-          timeout:10000
+          timeout: 7*24*60*60*1000
       },function(e){
           console.log("app error", origReqUrl, target, e.code);
 
