@@ -61,6 +61,12 @@
    menuItem = "Job Runner"
    containerName = "job-runner"
 
+   [apps.rPad]
+   auth = false
+   route = "/r-pad"
+   port = 3000
+   containerName="r-pad"
+
 [final]
    redirect = "/"
    cwd = "../MedBook-Telescope3"
